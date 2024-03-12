@@ -34,46 +34,46 @@ describe("Validating Web Inputs", () => {
     generalPage.verifyPageHeading_is("Web inputs");
 
     //Users input
-    cy.get("#input-number").type("12345");
-    cy.get("#input-text").type("Pro-Tech Alliance Batch#6");
+    webinputs.enterInputNumber().type("12345");
+    webinputs.enterInputText().type("Pro-Tech Alliance Batch#6");
     //123#ABC.y
-    cy.get("#input-password").type("HelloPeople12$5");
+    webinputs.enterInputPassword().type("HelloPeople12$5");
 
-    cy.get("#btn-display-inputs").click();
+    webinputs.displayInputButton().click();
 
     //Display output
-    cy.get("#output-number").should("contain.text", "12345");
-    cy.get("#output-text").should("contain.text", "Pro-Tech Alliance Batch#6");
-    cy.get("#output-password").should("contain.text", "HelloPeople12$5");
+    webinputs.displayOutputNumber().should("contain.text", "12345");
+    webinputs
+      .displayOutputText()
+      .should("contain.text", "Pro-Tech Alliance Batch#6");
+    webinputs.displayOutputPassword().should("contain.text", "HelloPeople12$5");
   });
 
   it("Clear Users input", () => {
-    cy.get("#input-number").type("12345");
-    cy.get("#input-text").type("Pro-Tech Alliance Batch#6");
-    cy.get("#input-password").type("HelloPeople12$5");
-    cy.get("#btn-clear-inputs").click();
+    webinputs.enterInputNumber().type("12345");
+    webinputs.enterInputText().type("Pro-Tech Alliance Batch#6");
+    webinputs.enterInputPassword().type("HelloPeople12$5");
+    generalPage.displayClearInputButton().click();
 
     //checking all inouts are cleared
-    cy.get("#input-number").should("be.empty");
-    cy.get("#input-text").should("be.empty");
-    cy.get("#input-password").should("be.empty");
+    webinputs.enterInputNumber().should("be.empty");
+    webinputs.enterInputText().should("be.empty");
+    webinputs.enterInputPassword().should("be.empty");
   });
 
   it("Clearing users output with input", () => {
-    cy.get("#input-number").type("12345");
-    cy.get("#input-text").type("Pro-Tech Alliance Batch#6");
-    cy.get("#input-password").type("HelloPeople12$5");
+    webinputs.enterInputNumber().type("12345");
+    webinputs.enterInputText().type("Pro-Tech Alliance Batch#6");
+    webinputs.enterInputPassword().type("HelloPeople12$5");
 
-    cy.get("#btn-display-inputs").click(); //display button
-    //create an alias for output text
-    cy.get("#output-text").as("outputText");
-    cy.get("@outputText").should("be.visible");
+    webinputs.displayInputButton().click(); //display button
+    webinputs.displayOutputText().should("be.visible");
 
-    cy.get("#btn-clear-inputs").click(); //clear button
+    generalPage.displayClearInputButton().click(); //clear button
     cy.wait(2000);
-    cy.get("@outputText").should("not.exist");
-    cy.get("#input-number").should("be.empty");
-    cy.get("#input-text").should("be.empty");
-    cy.get("#input-password").should("be.empty");
+    webinputs.displayOutputText().should("not.exist");
+    webinputs.enterInputNumber().should("be.empty");
+    webinputs.enterInputText().should("be.empty");
+    webinputs.enterInputPassword().should("be.empty");
   });
 });

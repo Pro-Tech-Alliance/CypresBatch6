@@ -26,6 +26,10 @@ class WebInputPage {
     displayOutputPassword() {
         return cy.get('#output-password')
     }
+    clearInputButton(){
+        return cy.get('#btn-clear-inputs')
+    }
+   
 
 
 } export default WebInputPage

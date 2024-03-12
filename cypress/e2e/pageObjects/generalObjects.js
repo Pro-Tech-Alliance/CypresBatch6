@@ -1,17 +1,13 @@
-class GeneralPage{
+class GeneralPage {
+  verifyPageTitle_is(value) {
+    cy.title().should("contain", value);
+  }
 
-verifyPageTitle_is(value){
-    cy.title().should('contain', value)
+  verifyPageHeading_is(value) {
+    cy.get("h1").should("contain.text", value);
+  }
+  displayClearInputButton() {
+    return cy.get("#btn-clear-inputs");
+  }
 }
-
-verifyPageHeading_is(value){
-    cy.get('h1').should('contain.text', value)
-}
-
-
-
-
-
-
-
-}export default GeneralPage
+export default GeneralPage;

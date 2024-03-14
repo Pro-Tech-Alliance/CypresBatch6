@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 import WebInputPage from "../pageObjects/webInputs-objects"
 import GeneralPage from "../pageObjects/generalObjects"
+import { number } from "assert-plus";
 
 const webinputs = new WebInputPage();
 const generalPage = new GeneralPage()
@@ -42,55 +43,73 @@ describe('Validating Web Inputs', () => {
         generalPage.verifyPageHeading_is('Web inputs')
 
         //Users input
-        cy.get('#input-number').type("12345")
-        cy.get('#input-text').type('Pro-Tech Alliance Batch#6')
-        //123#ABC.y
-        cy.get('#input-password').type('HelloPeople12$5')
-
-        cy.get('#btn-display-inputs').click()
-
-        //Display output
-        cy.get('#output-number').should('contain.text', '12345')
-        cy.get('#output-text').should('contain.text', 'Pro-Tech Alliance Batch#6')
-        cy.get('#output-password').should('contain.text', 'HelloPeople12$5')
-
-    })
-
-
-    it('Clear Users input', () => {
-        cy.get('#input-number').type("12345")
-        cy.get('#input-text').type('Pro-Tech Alliance Batch#6')
-        cy.get('#input-password').type('HelloPeople12$5')
-        cy.get('#btn-clear-inputs').click()
-
-        //checking all inouts are cleared
-        cy.get('#input-number').should('be.empty')
-        cy.get('#input-text').should('be.empty')
-        cy.get('#input-password').should('be.empty')
-
-    })
-
-    it('Clearing users output with input', () => {
-        cy.get('#input-number').type("12345")
-        cy.get('#input-text').type('Pro-Tech Alliance Batch#6')
-        cy.get('#input-password').type('HelloPeople12$5')
-
-        cy.get('#btn-display-inputs').click()//display button
-        cy.get('#output-text').should('be.visible')
-
-        cy.get('#btn-clear-inputs').click()//clear button
-        cy.wait(2000)
-        cy.get('#output-text').should('not.be.visible')
-        cy.get('#input-number').should('be.empty')
-        cy.get('#input-text').should('be.empty')
-        cy.get('#input-password').should('be.empty')
-
-
-
-
-    })
-
-
-
-
-})
+         //Users input
+         webinputs.enterInputNumber().type("12345")
+         webinputs.enterInputText().type('Pro-Tech Alliance Batch#6')
+         //123#ABC.y
+         webinputs.enterInputPassword().type('HelloPeople12$5')
+ 
+         webinputs.displayInputButton().click()
+ 
+         //Display output
+         webinputs.displayOutputNumber().should('contain.text', '12345')
+         webinputs.displayOutputText().should('contain.text', 'Pro-Tech Alliance Batch#6')
+         webinputs.displayOutputPassword().should('contain.text', 'HelloPeople12$5')
+        //cy.get().invoke('text').as('datetext')
+     })
+     describe('Date Format Verification', () => {
+        it('Verifies the date format on the page', () => {
+            webinputs.enterInputNumber().type("12345")
+            webinputs.enterInputText().type('Pro-Tech Alliance Batch#6')
+            //123#ABC.y
+            webinputs.enterInputPassword().type('HelloPeople12$5')
+            cy.get('#input-date').type('2024-03-14')
+            webinputs.displayInputButton().click()
+    
+            //Display output
+            webinputs.displayOutputNumber().should('contain.text', '12345')
+            webinputs.displayOutputText().should('contain.text', 'Pro-Tech Alliance Batch#6')
+            webinputs.displayOutputPassword().should('contain.text', 'HelloPeople12$5')
+          cy.get('#output-date').invoke('text').as('dateText');
+      
+          cy.get('@dateText').should('match', /\d{4}-\d{2}-\d{2}/);
+        });
+      });
+ 
+     it('Clear Users input', () => {
+         webinputs.enterInputNumber().type("12345")
+         webinputs.enterInputText().type('Pro-Tech Alliance Batch#6')
+         webinputs.enterInputPassword().type('HelloPeople12$5')
+         generalPage.displayClearInputsButton().click()
+ 
+         //checking all inouts are cleared
+         webinputs.enterInputNumber().should('be.empty')
+         webinputs.enterInputText().should('be.empty')
+         webinputs.enterInputPassword().should('be.empty')
+ 
+     })
+ 
+     it('Clearing users output with input', () => {
+         webinputs.enterInputNumber().type("12345")
+         webinputs.enterInputText().type('Pro-Tech Alliance Batch#6')
+         webinputs.enterInputPassword().type('HelloPeople12$5')
+ 
+         webinputs.displayInputButton().click()//display button
+         webinputs.displayOutputText().should('be.visible')
+ 
+         generalPage.displayClearInputsButton().click()//clear button
+         cy.wait(2000)
+         webinputs.displayOutputText().should("not.exist");
+         webinputs.enterInputNumber().should('be.empty')
+         webinputs.enterInputText().should('be.empty')
+         webinputs.enterInputPassword().should('be.empty')
+        
+ 
+ 
+ 
+     })
+ 
+ 
+ 
+ 
+ })

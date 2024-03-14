@@ -7,9 +7,9 @@ verifyPageTitle_is(value){
 verifyPageHeading_is(value){
     cy.get('h1').should('contain.text', value)
 }
-
-
-
+displayClearInputsButton() {
+    return cy.get('#btn-clear-inputs')
+}
 
 
 

@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 import WebInputPage from "../pageObjects/webInputs-objects"
 import GeneralPage from "../pageObjects/generalObjects"
+import { number } from "assert-plus";
 
 const webinputs = new WebInputPage();
 const generalPage = new GeneralPage()
@@ -54,9 +55,26 @@ describe('Validating Web Inputs', () => {
          webinputs.displayOutputNumber().should('contain.text', '12345')
          webinputs.displayOutputText().should('contain.text', 'Pro-Tech Alliance Batch#6')
          webinputs.displayOutputPassword().should('contain.text', 'HelloPeople12$5')
- 
+        //cy.get().invoke('text').as('datetext')
      })
- 
+     describe('Date Format Verification', () => {
+        it('Verifies the date format on the page', () => {
+            webinputs.enterInputNumber().type("12345")
+            webinputs.enterInputText().type('Pro-Tech Alliance Batch#6')
+            //123#ABC.y
+            webinputs.enterInputPassword().type('HelloPeople12$5')
+            cy.get('#input-date').type('2024-03-14')
+            webinputs.displayInputButton().click()
+    
+            //Display output
+            webinputs.displayOutputNumber().should('contain.text', '12345')
+            webinputs.displayOutputText().should('contain.text', 'Pro-Tech Alliance Batch#6')
+            webinputs.displayOutputPassword().should('contain.text', 'HelloPeople12$5')
+          cy.get('#output-date').invoke('text').as('dateText');
+      
+          cy.get('@dateText').should('match', /\d{4}-\d{2}-\d{2}/);
+        });
+      });
  
      it('Clear Users input', () => {
          webinputs.enterInputNumber().type("12345")

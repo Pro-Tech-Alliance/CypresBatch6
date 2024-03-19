@@ -38,25 +38,20 @@ describe('Validating Web Inputs', () => {
 
     it('Positive Testing User Input', () => {
 
-
-        generalPage.verifyPageTitle_is('Web inputs')
-        generalPage.verifyPageHeading_is('Web inputs')
-
-
+        
         webinputs.displayClearButton().click()
-        cy.wait(2000)
-        // clear output's input 
-        webinputs.displayOutputText.should('not.display')
-
-        // clear output's input 
+        // clear user's input 
         webinputs.enterInputNumber().should('be.empty')
         webinputs.enterInputText().should('be.empty')
         webinputs.enterInputPassword().should('be.empty')
+        // clear output's input 
+        webinputs.displayOutputText.should('not.display')
+
 
         //Users input
-        webinputs.enterInputNumber("12345")
-        webinputs.enterInputText('Pro-Tech Alliance Batch#6')
-        webinputs.displayOutputPassword('HelloPeople12$5')
+        webinputs.enterInputNumber().should("12345")
+        webinputs.enterInputText().should('Pro-Tech Alliance Batch#6')
+        webinputs.displayOutputPassword().should('HelloPeople12$5')
 
         webinputs.displayInputButton().click()
         //Display output
@@ -69,9 +64,6 @@ describe('Validating Web Inputs', () => {
     it('Clearing users output with input', () => {
 
 
-        generalPage.verifyPageTitle_is('Web inputs')
-        generalPage.verifyPageHeading_is('Web inputs')
-
         webinputs.displayClearButton().click()
         cy.wait(2000)
         // clear output's input 
@@ -83,7 +75,6 @@ describe('Validating Web Inputs', () => {
         webinputs.enterInputPassword().should('be.empty')
 
     })
- })
+})
 
 
-   

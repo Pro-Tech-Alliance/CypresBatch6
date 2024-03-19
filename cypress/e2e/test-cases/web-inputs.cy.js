@@ -23,7 +23,7 @@ describe('Validating Web Inputs', () => {
         webinputs.enterInputPassword().type('123#ABC.y')
 
         webinputs.displayInputButton().click()
-      
+
         //Display output
         webinputs.displayOutputNumber().should('contain.text', '1234567890')
         webinputs.displayOutputText().should('contain.text', 'KTYDSTCTYCT56724567*^%$^')
@@ -37,22 +37,22 @@ describe('Validating Web Inputs', () => {
 
     it('Positive Testing User Input', () => {
 
-    
+
         generalPage.verifyPageTitle_is('Web inputs')
         generalPage.verifyPageHeading_is('Web inputs')
 
         //Users input
-        cy.get('#input-number').type("12345")
-        cy.get('#input-text').type('Pro-Tech Alliance Batch#6')
+        webinputs.enterInputNumber().type("12345")
+        webinputs.enterInputText().type('Pro-Tech Alliance Batch#6')
         //123#ABC.y
-        cy.get('#input-password').type('HelloPeople12$5')
+        webinputs.enterInputPassword().type('HelloPeople12$5')
 
-        cy.get('#btn-display-inputs').click()
+        generalPage.displayInputButton().click()
 
         //Display output
-        cy.get('#output-number').should('contain.text', '12345')
-        cy.get('#output-text').should('contain.text', 'Pro-Tech Alliance Batch#6')
-        cy.get('#output-password').should('contain.text', 'HelloPeople12$5')
+        webinputs.displayOutputNumber().should('contain.text', '12345')
+        webinputs.displayOutputText().should('contain.text', 'Pro-Tech Alliance Batch#6')
+        webinputs.displayOutputPassword().should('contain.text', 'HelloPeople12$5')
 
     })
 

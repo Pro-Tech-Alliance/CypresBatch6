@@ -1,6 +1,14 @@
+[
 {
 "randomText":"ACBIUDU975264339645*/*/*/**(&^_(^&*",
 "testName":"Pro-Tech Alliance",
 "testPassword":"HelloPeople12$5",
 "testEmail":"hello@emailtest.com"
+},
+{
+"InputValidContactName": "Pro-Tech Alliance",
+"InputValidPickupdate":  "2024-03-01",
+"SelectPaymentMethod":   "Card"
+    
 }
+]

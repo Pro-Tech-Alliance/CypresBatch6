@@ -10,7 +10,7 @@ InputContactNumber(){
 }
 
 InputPickUpDate(){
-    return cy.get('[name="pickupdater"]')
+    return cy.get('[name="pickupdate"]')
 }
 
 SelectPaymentMethod() {

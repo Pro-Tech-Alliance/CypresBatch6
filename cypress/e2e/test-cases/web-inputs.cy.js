@@ -29,6 +29,8 @@ describe('Validating Web Inputs', () => {
         webinputs.displayOutputText().should('contain.text', 'KTYDSTCTYCT56724567*^%$^')
         webinputs.displayOutputPassword().should('contain.text', '123#ABC.y')
 
+      
+
 
     })
 
@@ -49,10 +51,30 @@ describe('Validating Web Inputs', () => {
 
         generalPage.displayInputButton().click()
 
+
         //Display output
         webinputs.displayOutputNumber().should('contain.text', '12345')
         webinputs.displayOutputText().should('contain.text', 'Pro-Tech Alliance Batch#6')
         webinputs.displayOutputPassword().should('contain.text', 'HelloPeople12$5')
+
+
+        //****REFACTORING CODE TO USE POM
+
+        //User input
+        webinputs.enterInputNumber().type("12345")
+        webinputs.enterInputText().type('Pro-Tech Alliance Batch#6')
+        //password
+        webinputs.enterInputNumber().type('HelloPeople12$5')
+
+        webinputs.displayInputButton().click
+
+
+        //Display Output
+        webinputs.displayOutputNumber().should('contain.text', '12345')
+        webinputs.displayOutputText().should('contain.text', 'Pro-Tech Alliance Batch#6')
+        webinputs.displayOutputPassword().should('contain.text', 'HelloPeople12$5')
+
+
 
     })
 
@@ -68,12 +90,30 @@ describe('Validating Web Inputs', () => {
         cy.get('#input-text').should('be.empty')
         cy.get('#input-password').should('be.empty')
 
+
+        //****REFACTORING CODE TO USE POM
+
+        //User input
+        webinputs.enterInputNumber().type("12345")
+        webinputs.enterInputText().type('Pro-Tech Alliance Batch#6')
+        webinputs.enterInputPassword().type('HelloPeople12$5')
+        webinputs.clearInputButton().click()
+
+        //checking all inouts are cleared
+        webinputs.enterInputNumber().should('be.empty')
+        webinputs.enterInputText().should('be.empty')
+        webinputs.enterInputPassword().should('be.empty')
+
+
+    
     })
 
     it('Clearing users output with input', () => {
         cy.get('#input-number').type("12345")
         cy.get('#input-text').type('Pro-Tech Alliance Batch#6')
         cy.get('#input-password').type('HelloPeople12$5')
+
+
 
         cy.get('#btn-display-inputs').click()//display button
         cy.get('#output-text').should('be.visible')
@@ -84,6 +124,28 @@ describe('Validating Web Inputs', () => {
         cy.get('#input-number').should('be.empty')
         cy.get('#input-text').should('be.empty')
         cy.get('#input-password').should('be.empty')
+
+
+        //****REFACTORING CODE TO USE POM
+
+        //User input
+        webinputs.enterInputNumber().type("12345")
+        webinputs.enterInputText().type('Pro-Tech Alliance Batch#6')
+        webinputs.enterInputPassword().type('HelloPeople12$5')
+
+
+        webinputs.displayInputButton().click//display button
+        webinputs.displayOutputText().should('be.visible')
+
+        webinputs.clearInputButton().click()//clear button
+        cy.wait(2000)
+        webinputs.displayOutputText().should('not.be.visible')
+        webinputs.enterInputNumber().should('be.empty')
+        webinputs.enterInputText().should('be.empty')
+        webinputs.enterInputPassword().should('be.empty')
+
+
+
 
 
 

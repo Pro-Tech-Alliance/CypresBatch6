@@ -26,7 +26,7 @@ describe('Validating Web Inputs', () => {
 
         //Display output
         webinputs.displayOutputNumber().should('contain.text', '1234567890')
-        webinputs.displayOutputText().should('contain.text', 'KTYDSTCTYCT56724567*^%$^')
+        webinputs.displayOutputText().should('contain.text', 'KTYDSTCYCT56724567*^%$^')
         webinputs.displayOutputPassword().should('contain.text', '123#ABC.y')
 
 

@@ -19,7 +19,7 @@ describe('Validating Web Inputs', () => {
 
         //Users input
         webinputs.enterInputNumber().type("1234567890abcdefghiujgfhrt")
-        webinputs.enterInputText().type("KTYDSTCTYCT56724567*^%$^")
+        webinputs.enterInputText().type("KTYDSTCTYCT5672457*^%$^")
         webinputs.enterInputPassword().type('123#ABC.y')
 
         webinputs.displayInputButton().click()
